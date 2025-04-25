@@ -1,0 +1,480 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DOPAMINE DECOR THEME
+   Highly saturated, neon / pop-art energy. Neo-brutalist utility classes
+   included via @layer utilities.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme inline {
+  /* ── Color palette ──────────────────────────────────────────────────── */
+  --color-hot-pink:            #FF2D9B;
+  --color-hot-pink-light:      #FF6EC7;
+  --color-hot-pink-dark:       #C4006E;
+
+  --color-electric-blue:       #00C2FF;
+  --color-electric-blue-light: #66DEFF;
+  --color-electric-blue-dark:  #0085B2;
+
+  --color-lime-green:          #B6FF00;
+  --color-lime-green-light:    #D4FF66;
+  --color-lime-green-dark:     #7AB200;
+
+  --color-vivid-purple:        #A020F0;
+  --color-vivid-purple-light:  #C96EF5;
+  --color-vivid-purple-dark:   #6A00B0;
+
+  --color-solar-orange:        #FF6B00;
+  --color-solar-orange-light:  #FFA04D;
+  --color-solar-orange-dark:   #B34A00;
+
+  --color-pop-yellow:          #FFE600;
+  --color-pop-white:           #FFFFFF;
+  --color-pop-black:           #111111;
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-display: var(--font-cinzel);
+  --font-body:    var(--font-playfair);
+  --font-ui:      var(--font-cormorant);
+}
+
+/* ── Base reset ──────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #FFFFFF;
+  color: #111111;
+}
+
+body {
+  font-family: var(--font-playfair), Georgia, serif;
+  background-color: #FFFFFF;
+  color: #111111;
+  min-height: 100vh;
+}
+
+/* ── Custom utility classes ──────────────────────────────────────────────── */
+@layer utilities {
+  /* Neo-brutalist thick black border */
+  .neo-border {
+    border: 4px solid #111111;
+  }
+
+  /* Vivid saturated drop shadow — hot-pink by default */
+  .neo-shadow {
+    box-shadow: 4px 4px 0px #FF2D9B;
+  }
+
+  /* Multi-stop gradient across the full Dopamine Decor palette */
+  .gradient-pop {
+    background: linear-gradient(
+      135deg,
+      #FF2D9B 0%,
+      #A020F0 25%,
+      #00C2FF 50%,
+      #B6FF00 75%,
+      #FFE600 100%
+    );
+  }
+}
+
+/* ── Component classes ───────────────────────────────────────────────────── */
+
+/* Dopamine Decor card: thick border + vivid shadow */
+.dopamine-card {
+  border: 4px solid #111111;
+  box-shadow: 6px 6px 0px #FF2D9B;
+  background-color: #FFFFFF;
+}
+
+/* Vivid divider */
+.dopamine-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #A020F0;
+  font-family: var(--font-cormorant), serif;
+  letter-spacing: 0.2em;
+}
+
+.dopamine-divider::before,
+.dopamine-divider::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  background: linear-gradient(90deg, #FF2D9B, #00C2FF);
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-cormorant), serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #FF2D9B;
+  color: #FFFFFF;
+  border: 3px solid #111111;
+  box-shadow: 3px 3px 0px #111111;
+}
+.btn-primary:hover {
+  background-color: #C4006E;
+  box-shadow: 5px 5px 0px #111111;
+  transform: translate(-1px, -1px);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: #A020F0;
+  border: 3px solid #A020F0;
+  box-shadow: 3px 3px 0px #A020F0;
+}
+.btn-ghost:hover {
+  background-color: #A020F0;
+  color: #FFFFFF;
+  box-shadow: 5px 5px 0px #111111;
+  transform: translate(-1px, -1px);
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: #FF2D9B;
+  border: 3px solid #FF2D9B;
+  box-shadow: 3px 3px 0px #FF2D9B;
+}
+.btn-danger:hover {
+  background-color: #FF2D9B;
+  color: #FFFFFF;
+  box-shadow: 5px 5px 0px #111111;
+  transform: translate(-1px, -1px);
+}
+
+/* ── Tiptap / ProseMirror editor styles ──────────────────────────────────── */
+.ProseMirror {
+  min-height: 400px;
+  outline: none;
+  padding: 1rem;
+  font-family: var(--font-playfair), Georgia, serif;
+  line-height: 1.8;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #A020F0;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3 {
+  font-family: var(--font-cinzel), serif;
+  color: #A020F0;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #FF2D9B;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #C4006E;
+  font-style: italic;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid #00C2FF;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+}
+
+.ProseMirror code {
+  background-color: #FFE600;
+  color: #111111;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+  font-size: 0.9em;
+}
+
+.ProseMirror pre {
+  background-color: #111111;
+  color: #B6FF00;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 3px solid #B6FF00;
+  overflow-x: auto;
+}
+
+.ProseMirror pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+/* ── Section labels ──────────────────────────────────────────────────────── */
+.section-label {
+  text-align: center;
+  color: #A020F0;
+  font-family: var(--font-ui), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+/* ── Post banner cards ───────────────────────────────────────────────────── */
+.post-banner-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #111111;
+  box-shadow: 5px 5px 0px #FF2D9B;
+  height: 196px;
+}
+
+.post-banner-card--featured {
+  height: 450px;
+}
+
+.post-banner-card__image,
+.post-banner-card__placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s;
+}
+
+.post-banner-card__image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.post-banner-card__placeholder {
+  background: linear-gradient(135deg, #FF2D9B 0%, #A020F0 25%, #00C2FF 50%, #B6FF00 75%, #FFE600 100%);
+}
+
+.post-banner-card:hover .post-banner-card__image,
+.post-banner-card:hover .post-banner-card__placeholder {
+  transform: scale(1.05);
+}
+
+.post-banner-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17,17,17,0.85) 0%, rgba(17,17,17,0.35) 50%, transparent 100%);
+}
+
+.post-banner-card__title-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.post-banner-card__title {
+  color: #FFFFFF;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 900;
+  line-height: 1.2;
+  font-size: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.post-banner-card--featured .post-banner-card__title {
+  font-size: 1.5rem;
+}
+
+/* ── Author / About section ──────────────────────────────────────────────── */
+.author-card {
+  box-shadow: 8px 8px 0px #A020F0;
+}
+
+.author-photo {
+  width: 220px;
+  height: 220px;
+  background: linear-gradient(135deg, #FF2D9B 0%, #A020F0 100%);
+  box-shadow: 6px 6px 0px #00C2FF;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-photo__initials {
+  color: #FFFFFF;
+  font-family: var(--font-display), sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  user-select: none;
+}
+
+.author-name {
+  font-family: var(--font-display), sans-serif;
+  background-image: linear-gradient(135deg, #FF2D9B 0%, #A020F0 50%, #00C2FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── LinkedIn button ─────────────────────────────────────────────────────── */
+.linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #00C2FF;
+  padding: 0.75rem 1.25rem;
+  border: 3px solid #111111;
+  box-shadow: 4px 4px 0px #111111;
+  transition: transform 0.15s ease;
+}
+
+.linkedin-btn:hover {
+  transform: translate(-2px, -2px);
+}
+
+/* ── Site header ─────────────────────────────────────────────────────────── */
+.site-logo {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #FF2D9B 0%, #A020F0 25%, #00C2FF 50%, #B6FF00 75%, #FFE600 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.site-nav-link {
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  transition: color 0.15s;
+}
+
+.site-nav-link:hover {
+  color: #FF2D9B;
+}
+
+.site-nav-admin {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-ui), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background-color: #FF2D9B;
+  color: #FFFFFF;
+  border: 4px solid #111111;
+  padding: 0.375rem 0.75rem;
+  transition: background-color 0.15s;
+}
+
+.site-nav-admin:hover {
+  background-color: #C4006E;
+}
+
+/* ── Post card ───────────────────────────────────────────────────────────── */
+.post-card__date,
+.post-card__author,
+.post-card__comment-count,
+.post-card__read-more {
+  font-family: var(--font-ui), sans-serif;
+}
+
+.post-card__title {
+  font-family: var(--font-display), sans-serif;
+}
+
+/* ── Post content rendering ──────────────────────────────────────────────── */
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  font-family: var(--font-cinzel), serif;
+  color: #A020F0;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.post-content p {
+  margin-bottom: 1.2em;
+  line-height: 1.8;
+}
+
+.post-content blockquote {
+  border-left: 4px solid #FF2D9B;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #C4006E;
+  font-style: italic;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid #00C2FF;
+}
+
+.post-content ul,
+.post-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2em;
+}
+
+.post-content code {
+  background-color: #FFE600;
+  color: #111111;
+  padding: 0.1em 0.3em;
+  font-size: 0.9em;
+}
+
+.post-content pre {
+  background-color: #111111;
+  color: #B6FF00;
+  padding: 1rem;
+  border: 3px solid #B6FF00;
+  overflow-x: auto;
+  margin-bottom: 1.2em;
+}
+
+.post-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
