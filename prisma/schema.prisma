@@ -113,3 +113,45 @@ enum Role {
   USER
   ADMIN
 }
+
+model ChatUser {
+  id        String   @id
+  ip        String
+  createdAt DateTime @default(now())
+  lastSeen  DateTime @default(now())
+
+  sentMessages     ChatMessage[] @relation("SentMessages")
+  receivedMessages ChatMessage[] @relation("ReceivedMessages")
+  blocking         ChatBlock[]   @relation("Blocker")
+  blockedBy        ChatBlock[]   @relation("Blocked")
+
+  @@map("chat_users")
+}
+
+model ChatMessage {
+  id          String   @id @default(cuid())
+  senderId    String
+  recipientId String
+  content     String
+  sentAt      DateTime @default(now())
+  read        Boolean  @default(false)
+
+  sender    ChatUser @relation("SentMessages",     fields: [senderId],    references: [id])
+  recipient ChatUser @relation("ReceivedMessages", fields: [recipientId], references: [id])
+
+  @@index([senderId, recipientId])
+  @@index([recipientId, sentAt])
+  @@map("chat_messages")
+}
+
+model ChatBlock {
+  blockerId String
+  blockedId String
+  createdAt DateTime @default(now())
+
+  blocker ChatUser @relation("Blocker", fields: [blockerId], references: [id])
+  blocked ChatUser @relation("Blocked", fields: [blockedId], references: [id])
+
+  @@id([blockerId, blockedId])
+  @@map("chat_blocks")
+}

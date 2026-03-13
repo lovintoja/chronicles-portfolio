@@ -5,7 +5,7 @@ import { Linkedin } from "lucide-react"
 export default function LinkedInButton() {
   return (
     <a
-      href="https://www.linkedin.com/in/filipdumanowski/"
+      href="https://linkedin.com/in/filip-dumanowski-211a36231"
       target="_blank"
       rel="noopener noreferrer"
       className="linkedin-btn"

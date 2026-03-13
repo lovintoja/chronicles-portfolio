@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Space_Grotesk, Bungee } from "next/font/google"
 import "./globals.css"
 import SiteHeader from "@/components/nav/SiteHeader"
+import { ChatProvider } from "@/components/chat/ChatProvider"
 
 const bungee = Bungee({
   subsets: ["latin"],
@@ -43,8 +44,10 @@ export default function RootLayout({
       className={`${bungee.variable} ${spaceGrotesk.variable} ${spaceGroteskUI.variable}`}
     >
       <body className="min-h-screen bg-white text-pop-black antialiased">
-        <SiteHeader />
-        {children}
+        <ChatProvider>
+          <SiteHeader />
+          {children}
+        </ChatProvider>
       </body>
     </html>
   )

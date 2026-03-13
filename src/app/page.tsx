@@ -69,7 +69,7 @@ export default async function HomePage() {
   return (
     <main>
       {/* ── Top Banner ─────────────────────────────────────────────── */}
-      <section className="w-full px-6 pt-10 pb-6">
+      <section className="max-w-6xl mx-auto px-6 pt-10 pb-6">
         <p className="section-label mb-6">Latest Dispatches</p>
 
         {recentPosts.length > 0 ? (
@@ -100,7 +100,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── About Section ──────────────────────────────────────────── */}
-      <section className="w-full px-6 py-10">
+      <section className="max-w-6xl mx-auto px-6 py-10">
         <DopamineDivider className="mb-10" />
 
         <div className="dopamine-card author-card p-8 md:p-10">

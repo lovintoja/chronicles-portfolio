@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { PenLine } from "lucide-react"
+import ChatNavButton from "@/components/nav/ChatNavButton"
 
 export default function SiteHeader() {
   return (
@@ -12,6 +13,7 @@ export default function SiteHeader() {
           <Link href="/" className="site-nav-link">
             Home
           </Link>
+          <ChatNavButton />
           <Link href="/admin" className="site-nav-admin">
             <PenLine className="h-3.5 w-3.5" />
             Admin
