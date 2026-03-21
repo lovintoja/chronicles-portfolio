@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { testDb } from '../../setup'
 
 // Mock @/lib/db so all query modules use the test database
@@ -29,7 +29,7 @@ async function createPost(
     slug?: string
     content?: string
     published?: boolean
-    publishedAt?: Date
+    publishedAt?: Date | null
   } = {}
 ) {
   const slug = overrides.slug ?? `slug-${Math.random().toString(36).slice(2)}`
@@ -45,7 +45,7 @@ async function createPost(
   })
 }
 
-describe('getAllPublishedPosts') {
+describe('getAllPublishedPosts', () => {
   it('should return only published posts', async () => {
     const author = await createAuthor('author-gapp')
     await createPost(author.id, { published: false, slug: 'draft-post' })
@@ -68,9 +68,9 @@ describe('getAllPublishedPosts') {
     const slugs = posts.map((p) => p.slug)
     expect(slugs.indexOf('newer-post')).toBeLessThan(slugs.indexOf('older-post'))
   })
-}
+})
 
-describe('getPostBySlug') {
+describe('getPostBySlug', () => {
   it('should return the post when it is published', async () => {
     const author = await createAuthor('author-gpbs-pub')
     await createPost(author.id, { published: true, slug: 'published-slug', publishedAt: new Date() })
@@ -92,9 +92,9 @@ describe('getPostBySlug') {
     const post = await getPostBySlug('nonexistent-slug-xyz')
     expect(post).toBeNull()
   })
-}
+})
 
-describe('getAllPostsForAdmin') {
+describe('getAllPostsForAdmin', () => {
   it('should return both draft and published posts', async () => {
     const author = await createAuthor('author-gapfa')
     await createPost(author.id, { published: false, slug: 'admin-draft' })
@@ -105,9 +105,9 @@ describe('getAllPostsForAdmin') {
     expect(slugs).toContain('admin-draft')
     expect(slugs).toContain('admin-published')
   })
-}
+})
 
-describe('getRecentPublishedPosts') {
+describe('getRecentPublishedPosts', () => {
   it('should return at most the requested number of posts, most recent first', async () => {
     const author = await createAuthor('author-grpp')
     await createPost(author.id, {
@@ -131,9 +131,9 @@ describe('getRecentPublishedPosts') {
     expect(posts[0].slug).toBe('recent-newest')
     expect(posts[1].slug).toBe('recent-middle')
   })
-}
+})
 
-describe('getAllPublishedSlugs') {
+describe('getAllPublishedSlugs', () => {
   it('should return slugs only for published posts', async () => {
     const author = await createAuthor('author-gaps')
     await createPost(author.id, { published: false, slug: 'unpublished-slug-gaps' })
@@ -144,4 +144,4 @@ describe('getAllPublishedSlugs') {
     expect(slugValues).toContain('published-slug-gaps')
     expect(slugValues).not.toContain('unpublished-slug-gaps')
   })
-}
+})

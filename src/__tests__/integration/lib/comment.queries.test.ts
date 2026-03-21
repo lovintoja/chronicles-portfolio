@@ -29,7 +29,7 @@ async function createPost(authorId: string, slug: string) {
   })
 }
 
-describe('getCommentsByPostId') {
+describe('getCommentsByPostId', () => {
   it('should return comments for a post in ascending createdAt order', async () => {
     const author = await createAuthor('author-cmt-order')
     const post = await createPost(author.id, 'cmt-order-slug')
@@ -73,4 +73,4 @@ describe('getCommentsByPostId') {
     const comments = await getCommentsByPostId(post.id)
     expect(comments).toEqual([])
   })
-}
+})

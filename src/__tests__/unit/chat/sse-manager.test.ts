@@ -21,7 +21,7 @@ function makeConnection(): {
   return { controller, encoder }
 }
 
-// Clean up the singleton state between tests by removing any IDs we added
+// Track IDs registered in each test so we can clean up the singleton state
 let registeredIds: string[] = []
 
 beforeEach(() => {
@@ -37,24 +37,24 @@ function registerUser(chatId: string): void {
   registeredIds.push(chatId)
 }
 
-describe('sse-manager') {
-  describe('register') {
+describe('sse-manager', () => {
+  describe('register', () => {
     it('should make the user appear in getActiveUserIds()', () => {
       registerUser('user-a')
       expect(getActiveUserIds()).toContain('user-a')
     })
-  }
+  })
 
-  describe('remove') {
+  describe('remove', () => {
     it('should remove the user from getActiveUserIds()', () => {
       registerUser('user-b')
       remove('user-b')
       registeredIds = registeredIds.filter((id) => id !== 'user-b')
       expect(getActiveUserIds()).not.toContain('user-b')
     })
-  }
+  })
 
-  describe('sendToUser') {
+  describe('sendToUser', () => {
     it('should return true for a registered user', () => {
       registerUser('user-c')
       const event: SSEEvent = { type: 'connected', data: null }
@@ -65,9 +65,9 @@ describe('sse-manager') {
       const event: SSEEvent = { type: 'connected', data: null }
       expect(sendToUser('user-unknown-xyz', event)).toBe(false)
     })
-  }
+  })
 
-  describe('isOnline') {
+  describe('isOnline', () => {
     it('should return true after register', () => {
       registerUser('user-d')
       expect(isOnline('user-d')).toBe(true)
@@ -79,5 +79,5 @@ describe('sse-manager') {
       registeredIds = registeredIds.filter((id) => id !== 'user-e')
       expect(isOnline('user-e')).toBe(false)
     })
-  }
-}
+  })
+})

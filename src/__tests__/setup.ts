@@ -14,8 +14,14 @@ export const testDb = new PrismaClient({
 
 beforeAll(() => {
   execSync(
-    `DATABASE_URL=${DB_URL} npx prisma db push --force-reset --schema=./prisma/schema.prisma`,
-    { stdio: 'pipe' }
+    `npx prisma db push --force-reset --url "${DB_URL}" --schema=./prisma/schema.prisma`,
+    {
+      stdio: 'pipe',
+      env: {
+        ...process.env,
+        PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION: 'yes',
+      },
+    }
   )
 })
 
