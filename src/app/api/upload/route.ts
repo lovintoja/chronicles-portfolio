@@ -22,21 +22,31 @@ export async function POST(req: NextRequest) {
   const ext        = file.type.split("/")[1].replace("jpeg", "jpg")
   const filename   = `${Date.now()}.${ext}`
   const remotePath = `/Blog/${filename}`
+  const davBase    = `${ncUrl}/remote.php/dav/files/${ncUser}`
 
-  const uploadRes = await fetch(
-    `${ncUrl}/remote.php/dav/files/${ncUser}${remotePath}`,
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `Basic ${auth}`,
-        "Content-Type": file.type,
-        "X-NC-WebDAV-AutoMkcol": "1",
-      },
-      body: Buffer.from(await file.arrayBuffer()),
-    }
-  )
+  // Ensure the Blog folder exists (MKCOL is idempotent — 405 means already exists)
+  const mkcolRes = await fetch(`${davBase}/Blog`, {
+    method: "MKCOL",
+    headers: { Authorization: `Basic ${auth}` },
+  })
+  if (!mkcolRes.ok && mkcolRes.status !== 405) {
+    const body = await mkcolRes.text().catch(() => "")
+    console.error(`Nextcloud MKCOL ${mkcolRes.status}:`, body)
+    return NextResponse.json({ error: `Failed to create Blog folder (${mkcolRes.status}).`, detail: body }, { status: 502 })
+  }
+
+  const uploadRes = await fetch(`${davBase}${remotePath}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Basic ${auth}`,
+      "Content-Type": file.type,
+    },
+    body: Buffer.from(await file.arrayBuffer()),
+  })
   if (!uploadRes.ok) {
-    return NextResponse.json({ error: "Upload to Nextcloud failed." }, { status: 502 })
+    const body = await uploadRes.text().catch(() => "")
+    console.error(`Nextcloud PUT ${uploadRes.status}:`, body)
+    return NextResponse.json({ error: `Upload to Nextcloud failed (${uploadRes.status}).`, detail: body }, { status: 502 })
   }
 
   const shareParams = new URLSearchParams({ path: remotePath, shareType: "3", permissions: "1" })
@@ -55,7 +65,8 @@ export async function POST(req: NextRequest) {
   const xml = await shareRes.text()
   const token = xml.match(/<token>([^<]+)<\/token>/)?.[1]
   if (!token) {
-    return NextResponse.json({ error: "Failed to create public share." }, { status: 502 })
+    console.error(`Nextcloud share ${shareRes.status}:`, xml)
+    return NextResponse.json({ error: `Failed to create public share (${shareRes.status}).`, detail: xml }, { status: 502 })
   }
 
   return NextResponse.json({ url: `${ncUrl}/index.php/s/${token}/preview` })

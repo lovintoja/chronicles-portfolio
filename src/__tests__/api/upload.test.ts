@@ -76,24 +76,40 @@ describe('POST /api/upload', () => {
 
   describe('when Nextcloud PUT returns a non-2xx status', () => {
     it('should return 502', async () => {
-      vi.mocked(fetch).mockResolvedValueOnce(
-        new Response('Server Error', { status: 500 })
-      )
+      const mockFetch = vi.mocked(fetch)
+      // First call: MKCOL succeeds
+      mockFetch.mockResolvedValueOnce(new Response('', { status: 201 }))
+      // Second call: PUT fails
+      mockFetch.mockResolvedValueOnce(new Response('Server Error', { status: 500 }))
 
       const req = makeUploadRequest(makeFakeFile('image/png'))
       const res = await POST(req)
       expect(res.status).toBe(502)
       const json = await res.json() as { error: string }
-      expect(json.error).toMatch(/nextcloud/i)
+      expect(json.error).toMatch(/upload to nextcloud/i)
+    })
+  })
+
+  describe('when MKCOL returns a non-2xx non-405 status', () => {
+    it('should return 502', async () => {
+      vi.mocked(fetch).mockResolvedValueOnce(new Response('Forbidden', { status: 403 }))
+
+      const req = makeUploadRequest(makeFakeFile('image/png'))
+      const res = await POST(req)
+      expect(res.status).toBe(502)
+      const json = await res.json() as { error: string }
+      expect(json.error).toMatch(/blog folder/i)
     })
   })
 
   describe('when share creation returns XML with no token', () => {
     it('should return 502', async () => {
       const mockFetch = vi.mocked(fetch)
-      // First call: PUT upload succeeds
+      // First call: MKCOL succeeds (folder already exists)
+      mockFetch.mockResolvedValueOnce(new Response('', { status: 405 }))
+      // Second call: PUT upload succeeds
       mockFetch.mockResolvedValueOnce(new Response('', { status: 201 }))
-      // Second call: share creation returns XML without a token
+      // Third call: share creation returns XML without a token
       mockFetch.mockResolvedValueOnce(
         new Response('<ocs><data></data></ocs>', { status: 200 })
       )
@@ -109,9 +125,11 @@ describe('POST /api/upload', () => {
   describe('when upload succeeds and share is created', () => {
     it('should return 200 with a URL containing the share token', async () => {
       const mockFetch = vi.mocked(fetch)
-      // First call: PUT upload succeeds
+      // First call: MKCOL (folder already exists → 405)
+      mockFetch.mockResolvedValueOnce(new Response('', { status: 405 }))
+      // Second call: PUT upload succeeds
       mockFetch.mockResolvedValueOnce(new Response('', { status: 201 }))
-      // Second call: share creation returns XML with token
+      // Third call: share creation returns XML with token
       mockFetch.mockResolvedValueOnce(
         new Response(buildXmlResponse('abc123token'), { status: 200 })
       )
@@ -126,6 +144,7 @@ describe('POST /api/upload', () => {
 
     it('should accept image/jpeg files', async () => {
       const mockFetch = vi.mocked(fetch)
+      mockFetch.mockResolvedValueOnce(new Response('', { status: 405 }))
       mockFetch.mockResolvedValueOnce(new Response('', { status: 200 }))
       mockFetch.mockResolvedValueOnce(
         new Response(buildXmlResponse('jpegtoken'), { status: 200 })
@@ -141,6 +160,7 @@ describe('POST /api/upload', () => {
 
     it('should accept image/gif files', async () => {
       const mockFetch = vi.mocked(fetch)
+      mockFetch.mockResolvedValueOnce(new Response('', { status: 405 }))
       mockFetch.mockResolvedValueOnce(new Response('', { status: 200 }))
       mockFetch.mockResolvedValueOnce(
         new Response(buildXmlResponse('giftoken'), { status: 200 })
@@ -154,6 +174,7 @@ describe('POST /api/upload', () => {
 
     it('should accept image/webp files', async () => {
       const mockFetch = vi.mocked(fetch)
+      mockFetch.mockResolvedValueOnce(new Response('', { status: 405 }))
       mockFetch.mockResolvedValueOnce(new Response('', { status: 200 }))
       mockFetch.mockResolvedValueOnce(
         new Response(buildXmlResponse('webptoken'), { status: 200 })
