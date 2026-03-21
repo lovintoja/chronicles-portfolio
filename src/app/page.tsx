@@ -3,7 +3,8 @@ import { getRecentPublishedPosts, getAllPublishedPosts } from "@/lib/post.querie
 import PostCard from "@/components/blog/PostCard"
 import DopamineDivider from "@/components/ui/DopamineDivider"
 import type { Metadata } from "next"
-import type { PostWithAuthor } from "@/types"
+
+type AllPost = Awaited<ReturnType<typeof getAllPublishedPosts>>[number]
 
 export const metadata: Metadata = {
   title: "The Chronicle",
@@ -106,7 +107,7 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="space-y-8">
-            {allPosts.map((post: PostWithAuthor) => (
+            {allPosts.map((post: AllPost) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
