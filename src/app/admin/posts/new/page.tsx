@@ -4,7 +4,6 @@ import { useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import dynamic from "next/dynamic"
 import { generateSlug } from "@/lib/slug"
-import Image from "next/image"
 
 const RichTextEditor = dynamic(() => import("@/components/editor/RichTextEditor"), {
   ssr: false,
@@ -186,11 +185,9 @@ export default function NewPostPage() {
           )}
           {headerImage && !isUploading && (
             <div className="mt-3 neo-border" style={{ boxShadow: "4px 4px 0px #FF2D9B", display: "inline-block" }}>
-              <Image
+              <img
                 src={headerImage}
                 alt="Header image preview"
-                width={320}
-                height={180}
                 className="block object-cover"
                 style={{ maxHeight: "180px", width: "320px" }}
               />

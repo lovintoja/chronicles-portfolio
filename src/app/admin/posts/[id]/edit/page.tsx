@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react"
 import { useRouter, useParams } from "next/navigation"
 import dynamic from "next/dynamic"
 import { generateSlug } from "@/lib/slug"
-import Image from "next/image"
 
 const RichTextEditor = dynamic(() => import("@/components/editor/RichTextEditor"), {
   ssr: false,
@@ -207,11 +206,9 @@ export default function EditPostPage() {
                 Current image:
               </p>
               <div className="neo-border" style={{ boxShadow: "4px 4px 0px #FF2D9B", display: "inline-block" }}>
-                <Image
+                <img
                   src={headerImage}
                   alt="Current header image"
-                  width={320}
-                  height={180}
                   className="block object-cover"
                   style={{ maxHeight: "180px", width: "320px" }}
                 />
