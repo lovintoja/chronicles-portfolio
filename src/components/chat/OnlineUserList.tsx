@@ -49,7 +49,7 @@ export default function OnlineUserList() {
             </span>
           </div>
         ) : (
-          otherUsers.map((userId) => {
+          otherUsers.map((userId: string) => {
             const unreadForUser =
               conversations.find((c) => c.partnerId === userId)?.unreadCount ?? 0
             return (

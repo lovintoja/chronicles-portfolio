@@ -26,7 +26,7 @@ export default function CommentList({ comments }: CommentListProps) {
 
   return (
     <div className="space-y-6">
-      {comments.map((comment, index) => (
+      {comments.map((comment: Comment, index: number) => (
         <div key={comment.id}>
           {index > 0 && <ArtDecoDivider className="my-4" />}
           <div className="neo-border neo-shadow bg-white p-4">

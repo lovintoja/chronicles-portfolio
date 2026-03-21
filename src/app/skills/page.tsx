@@ -1,12 +1,20 @@
 import type { Metadata } from "next"
+import type { LucideIcon } from "lucide-react"
 import { Server, Cpu, Cloud, Lock, GitBranch, Box, Globe, Activity } from "lucide-react"
 import DopamineDivider from "@/components/ui/DopamineDivider"
+
+interface AzureService {
+  icon: LucideIcon
+  name: string
+  description: string
+  shadow: string
+}
 
 export const metadata: Metadata = {
   title: "Skills | The Chronicle",
 }
 
-const azureServices = [
+const azureServices: AzureService[] = [
   {
     icon: Lock,
     name: "Key Vault",
@@ -117,7 +125,7 @@ export default function SkillsPage() {
               </span>
             </div>
             <ul className="space-y-1">
-              {dotnetSkills.map((skill) => (
+              {dotnetSkills.map((skill: string) => (
                 <li
                   key={skill}
                   className="pl-3 py-1 text-sm font-body text-pop-black"
@@ -159,7 +167,7 @@ export default function SkillsPage() {
               </span>
             </div>
             <ul className="space-y-1">
-              {javaSkills.map((skill) => (
+              {javaSkills.map((skill: string) => (
                 <li
                   key={skill}
                   className="pl-3 py-1 text-sm font-body text-pop-black"
@@ -199,7 +207,7 @@ export default function SkillsPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {azureServices.map(({ icon: Icon, name, description, shadow }) => (
+          {azureServices.map(({ icon: Icon, name, description, shadow }: AzureService) => (
             <div
               key={name}
               className="dopamine-card p-4"
@@ -220,7 +228,7 @@ export default function SkillsPage() {
       <section className="max-w-5xl mx-auto px-6 py-10">
         <p className="section-label mb-6">Tooling &amp; Workflow</p>
         <div className="flex flex-wrap gap-3 justify-center">
-          {tools.map((tool) => (
+          {tools.map((tool: string) => (
             <span
               key={tool}
               className="neo-border px-3 py-1 text-sm font-bold font-ui uppercase bg-pop-yellow text-pop-black"

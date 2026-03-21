@@ -75,7 +75,7 @@ export async function getConversations(chatId: string): Promise<Conversation[]> 
     }
   }
 
-  return Array.from(partnerMap.entries()).map(([partnerId, data]) => ({
+  return Array.from(partnerMap.entries()).map(([partnerId, data]: [string, { lastMessage: ChatMessage; unreadCount: number }]) => ({
     partnerId,
     lastMessage: data.lastMessage,
     unreadCount: data.unreadCount,
@@ -137,7 +137,7 @@ export async function getBlockedUsers(chatId: string): Promise<string[]> {
     where: { blockerId: chatId },
     select: { blockedId: true },
   })
-  return records.map((r) => r.blockedId)
+  return records.map((r: { blockedId: string }) => r.blockedId)
 }
 
 export async function chatUserExists(chatId: string): Promise<boolean> {

@@ -116,7 +116,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           setConversations((prev) => {
             const existing = prev.find((c) => c.partnerId === partnerId)
             if (existing) {
-              return prev.map((c) =>
+              return prev.map((c: Conversation) =>
                 c.partnerId === partnerId
                   ? { ...c, unreadCount: c.unreadCount + 1, lastMessage: msg }
                   : c
@@ -199,7 +199,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       setIsPanelOpen(true)
 
       setConversations((prev) =>
-        prev.map((c) =>
+        prev.map((c: Conversation) =>
           c.partnerId === partnerId ? { ...c, unreadCount: 0 } : c
         )
       )
@@ -249,7 +249,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
             setConversations((prev) => {
               const existing = prev.find((c) => c.partnerId === selectedPartnerId)
               if (existing) {
-                return prev.map((c) =>
+                return prev.map((c: Conversation) =>
                   c.partnerId === selectedPartnerId
                     ? { ...c, lastMessage: result.message }
                     : c

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useChatContext } from "@/components/chat/ChatProvider"
+import type { ChatMessage } from "@/lib/chat/types"
 
 const EMOJIS = [
   "😀","😂","🥰","😍","😊","😎","🤔","😅","😭","😤","🥺","🤣",
@@ -63,7 +64,7 @@ export default function MessageWindow() {
       </div>
 
       <div className="chat-message-list">
-        {currentMessages.map((msg) => {
+        {currentMessages.map((msg: ChatMessage) => {
           const isSent = msg.senderId === chatId
           return (
             <div
@@ -103,7 +104,7 @@ export default function MessageWindow() {
       <div className="chat-input-area">
         {isEmojiPickerOpen && (
           <div className="chat-emoji-picker">
-            {EMOJIS.map((emoji) => (
+            {EMOJIS.map((emoji: string) => (
               <button
                 key={emoji}
                 className="chat-emoji-btn"
