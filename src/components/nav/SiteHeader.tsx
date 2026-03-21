@@ -10,8 +10,8 @@ export default function SiteHeader() {
           <span className="site-logo">The Chronicle</span>
         </Link>
         <nav className="flex items-center gap-4">
-          <Link href="/" className="site-nav-link">
-            Home
+          <Link href="/about" className="site-nav-link">
+            About
           </Link>
           <Link href="/skills" className="site-nav-link">
             Skills

@@ -77,7 +77,6 @@ const javaSkills = [
 export default function SkillsPage() {
   return (
     <main>
-      {/* Hero */}
       <section className="max-w-5xl mx-auto px-6 py-12">
         <p className="section-label mb-3">Technical Skills</p>
         <h1 className="font-display text-5xl md:text-6xl font-bold text-pop-black leading-tight">
@@ -87,12 +86,10 @@ export default function SkillsPage() {
 
       <DopamineDivider />
 
-      {/* Backend Development */}
       <section className="max-w-5xl mx-auto px-6 py-10">
         <p className="section-label mb-6">Backend Development</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          {/* .NET Card */}
           <div
             className="dopamine-card p-6"
             style={{ boxShadow: "6px 6px 0 #00C2FF" }}
@@ -132,7 +129,6 @@ export default function SkillsPage() {
             </ul>
           </div>
 
-          {/* Java/Spring Card */}
           <div
             className="dopamine-card p-6"
             style={{ boxShadow: "6px 6px 0 #B6FF00" }}
@@ -180,11 +176,9 @@ export default function SkillsPage() {
 
       <DopamineDivider />
 
-      {/* DevOps & Cloud */}
       <section className="max-w-5xl mx-auto px-6 py-10">
         <p className="section-label mb-6">DevOps &amp; Cloud</p>
 
-        {/* Azure Overview Card */}
         <div
           className="dopamine-card p-6 mb-6"
           style={{ boxShadow: "8px 8px 0 #A020F0" }}
@@ -204,7 +198,6 @@ export default function SkillsPage() {
           </span>
         </div>
 
-        {/* Azure Service Tiles */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {azureServices.map(({ icon: Icon, name, description, shadow }) => (
             <div
@@ -224,7 +217,6 @@ export default function SkillsPage() {
 
       <DopamineDivider />
 
-      {/* Tooling & Workflow */}
       <section className="max-w-5xl mx-auto px-6 py-10">
         <p className="section-label mb-6">Tooling &amp; Workflow</p>
         <div className="flex flex-wrap gap-3 justify-center">

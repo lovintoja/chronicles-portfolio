@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Space_Grotesk, Bungee } from "next/font/google"
 import "./globals.css"
 import SiteHeader from "@/components/nav/SiteHeader"
+import SiteFooter from "@/components/nav/SiteFooter"
 import { ChatProvider } from "@/components/chat/ChatProvider"
 
 const bungee = Bungee({
@@ -47,6 +48,7 @@ export default function RootLayout({
         <ChatProvider>
           <SiteHeader />
           {children}
+          <SiteFooter />
         </ChatProvider>
       </body>
     </html>

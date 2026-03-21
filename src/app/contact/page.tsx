@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, MapPin, Github, Send, Linkedin } from "lucide-react"
+import { Mail, MapPin, Code2, Send } from "lucide-react"
 import LinkedInButton from "@/components/ui/LinkedInButton"
 import DopamineDivider from "@/components/ui/DopamineDivider"
 
@@ -41,7 +41,6 @@ export default function ContactPage() {
 
   return (
     <main>
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-6 py-12">
         <p className="section-label mb-4">Contact</p>
         <h1 className="font-display text-4xl md:text-5xl font-black" style={{
@@ -61,11 +60,9 @@ export default function ContactPage() {
         <DopamineDivider className="mb-10" />
       </div>
 
-      {/* ── Two-column content ────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-          {/* LEFT: Contact Info card */}
           <div
             className="dopamine-card p-8"
             style={{ boxShadow: "6px 6px 0 #A020F0" }}
@@ -73,40 +70,32 @@ export default function ContactPage() {
             <h2 className="font-display text-2xl font-black mb-6">Reach Out</h2>
 
             <ul>
-              {/* LinkedIn */}
               <li className="flex items-center gap-3 py-3 border-b border-gray-100">
-                <Linkedin className="text-hot-pink h-5 w-5 flex-shrink-0" aria-hidden="true" />
                 <LinkedInButton />
               </li>
 
-              {/* Email */}
               <li className="flex items-center gap-3 py-3 border-b border-gray-100">
                 <Mail className="text-electric-blue h-5 w-5 flex-shrink-0" aria-hidden="true" />
                 <span className="font-ui font-bold uppercase tracking-widest text-sm text-pop-black">
-                  {/* TODO: Replace with your email address */}
-                  your@email.com
+                  filip.dumanowski@gmail.com
                 </span>
               </li>
 
-              {/* GitHub */}
               <li className="flex items-center gap-3 py-3 border-b border-gray-100">
-                <Github className="text-vivid-purple h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                <Code2 className="text-vivid-purple h-5 w-5 flex-shrink-0" aria-hidden="true" />
                 <a
-                  href="https://github.com/filipdumanowski"
+                  href="https://github.com/lovintoja"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-ui font-bold uppercase tracking-widest text-sm text-pop-black hover:text-hot-pink transition-colors"
                 >
-                  github.com/filipdumanowski
-                  {/* TODO: Update GitHub username if needed */}
+                  github.com/lovintoja
                 </a>
               </li>
 
-              {/* Location */}
               <li className="flex items-center gap-3 py-3">
                 <MapPin className="text-solar-orange h-5 w-5 flex-shrink-0" aria-hidden="true" />
                 <span className="font-ui font-bold uppercase tracking-widest text-sm text-pop-black">
-                  {/* TODO: Add your location */}
                   Poland
                 </span>
               </li>
@@ -117,12 +106,10 @@ export default function ContactPage() {
             </p>
           </div>
 
-          {/* RIGHT: Message Form card */}
           <div className="dopamine-card p-8">
             <h2 className="font-display text-2xl font-black mb-6">Send a Message</h2>
 
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-              {/* Name */}
               <div>
                 <label
                   htmlFor="contact-name"
@@ -141,7 +128,6 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label
                   htmlFor="contact-email"
@@ -163,7 +149,6 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              {/* Message */}
               <div>
                 <label
                   htmlFor="contact-message"
@@ -182,21 +167,18 @@ export default function ContactPage() {
                 />
               </div>
 
-              {/* Success message */}
               {status === "success" && (
                 <div className="bg-lime-green text-pop-black neo-border p-4 font-ui font-bold text-sm tracking-wide">
                   ✓ Message sent! I&apos;ll get back to you soon.
                 </div>
               )}
 
-              {/* Error message */}
               {status === "error" && (
                 <div className="bg-hot-pink text-white neo-border p-4 font-ui font-bold text-sm tracking-wide">
                   ✗ {errorMsg || "Something went wrong. Please try again."}
                 </div>
               )}
 
-              {/* Submit button */}
               <button
                 type="submit"
                 disabled={status === "loading" || status === "success"}
