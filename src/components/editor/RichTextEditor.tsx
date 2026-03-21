@@ -38,7 +38,7 @@ export default function RichTextEditor({ initialContent = "", onChange }: RichTe
       if (!file || !editor) return
 
       const formData = new FormData()
-      formData.append("file", file)
+      formData.append("image", file)
 
       try {
         const res = await fetch("/api/upload", {
