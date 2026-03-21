@@ -1,8 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { NextRequest } from 'next/server'
 
-const mockSendMail = vi.fn().mockResolvedValue({})
-const mockCreateTransport = vi.fn(() => ({ sendMail: mockSendMail }))
+const { mockSendMail, mockCreateTransport } = vi.hoisted(() => {
+  const mockSendMail = vi.fn().mockResolvedValue({})
+  const mockCreateTransport = vi.fn(() => ({ sendMail: mockSendMail }))
+  return { mockSendMail, mockCreateTransport }
+})
 
 vi.mock('nodemailer', () => ({
   default: { createTransport: mockCreateTransport },
