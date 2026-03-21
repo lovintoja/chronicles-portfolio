@@ -8,8 +8,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
   session: { strategy: "jwt" },
   callbacks: {
-    async signIn({ user }) {
-      if (user.email !== process.env.ADMIN_EMAIL) {
+    async signIn({ user, profile }) {
+      const githubLogin = (profile as { login?: string } | undefined)?.login
+      const allowedEmail = process.env.ADMIN_EMAIL
+      const allowedLogin = process.env.ADMIN_GITHUB_LOGIN
+
+      const emailMatch = allowedEmail && user.email === allowedEmail
+      const loginMatch = allowedLogin && githubLogin === allowedLogin
+
+      if (!emailMatch && !loginMatch) {
         return "/auth/error?error=AccessDenied"
       }
       return true
