@@ -81,6 +81,16 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
       </header>
 
+      {post.headerImage && post.headerImage.trim() !== "" && (
+        <div className="neo-border mb-8 overflow-hidden" style={{ boxShadow: "5px 5px 0 #FF2D9B" }}>
+          <img
+            src={post.headerImage}
+            alt={post.title}
+            className="w-full object-cover max-h-[480px]"
+          />
+        </div>
+      )}
+
       <ArtDecoDivider className="mb-8" />
 
       <div className="dopamine-card p-8 mb-12">
