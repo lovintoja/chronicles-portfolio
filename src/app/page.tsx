@@ -77,7 +77,7 @@ export default async function HomePage() {
 
             {sidePosts.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:grid-rows-2">
-                {sidePosts.slice(0, 4).map((post) => (
+                {sidePosts.slice(0, 4).map((post: BannerPost) => (
                   <PostBannerCard key={post.id} post={post} />
                 ))}
               </div>
