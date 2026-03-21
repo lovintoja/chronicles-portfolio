@@ -139,7 +139,7 @@ describe('POST /api/upload', () => {
       expect(res.status).toBe(200)
       const json = await res.json() as { url: string }
       expect(json.url).toContain('abc123token')
-      expect(json.url).toContain('preview')
+      expect(json.url).toContain('download')
     })
 
     it('should accept image/jpeg files', async () => {

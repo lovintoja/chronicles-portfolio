@@ -69,5 +69,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: `Failed to create public share (${shareRes.status}).`, detail: xml }, { status: 502 })
   }
 
-  return NextResponse.json({ url: `${ncUrl}/index.php/s/${token}/preview` })
+  return NextResponse.json({ url: `${ncUrl}/index.php/s/${token}/download` })
 }
