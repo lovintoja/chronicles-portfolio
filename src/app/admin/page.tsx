@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { getAllPostsForAdmin } from "@/lib/post.queries"
+
+type AdminPost = Awaited<ReturnType<typeof getAllPostsForAdmin>>[number]
 import { publishPost, deletePost } from "@/app/actions/post.actions"
 import { PenLine, Eye, EyeOff, Trash2, Plus } from "lucide-react"
 import type { Metadata } from "next"
@@ -35,7 +37,7 @@ export default async function AdminPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {posts.map((post) => (
+          {posts.map((post: AdminPost) => (
             <div key={post.id} className="dopamine-card p-5 flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-1">
