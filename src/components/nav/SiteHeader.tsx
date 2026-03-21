@@ -13,6 +13,12 @@ export default function SiteHeader() {
           <Link href="/" className="site-nav-link">
             Home
           </Link>
+          <Link href="/skills" className="site-nav-link">
+            Skills
+          </Link>
+          <Link href="/contact" className="site-nav-link">
+            Contact
+          </Link>
           <ChatNavButton />
           <Link href="/admin" className="site-nav-admin">
             <PenLine className="h-3.5 w-3.5" />
