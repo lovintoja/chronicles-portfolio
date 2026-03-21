@@ -19,3 +19,13 @@ It features an admin-only area for creating posts and a public-facing commenting
   - If `#` exists, split the string at the *first* `#`. The left side is `displayName`. 
   - The right side is the password. Hash it using `crypto.createHmac('sha256', process.env.TRIPCODE_SECRET).update(password).digest('hex')`.
   - Save the first 6 characters of that hash as the `tripcode` string in the database.
+
+# Testing Requirements
+Every new piece of functionality MUST include tests. This is non-negotiable.
+
+- **New API route** → add `src/__tests__/api/{route}.test.ts` covering: auth checks, all validation error paths, happy path, external service mocking
+- **New server action** → add `src/__tests__/integration/actions/{action}.test.ts` covering: validation errors, auth check, DB side effects, success state
+- **New utility function** → add `src/__tests__/unit/lib/{file}.test.ts` covering: all code paths, edge cases, boundary values
+- **New DB query function** → add test in the relevant `src/__tests__/integration/lib/` file covering: returns correct data, filters correctly, empty results
+
+Run `npm test` before every commit. A failing test suite blocks merging.
