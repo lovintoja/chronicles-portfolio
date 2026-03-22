@@ -42,12 +42,7 @@ export default function HeroSection() {
               className="neo-border bg-hot-pink w-40 h-40 relative"
               style={{ boxShadow: "8px 8px 0 #B6FF00" }}
             >
-              <span
-                className="absolute inset-0 flex items-center justify-center font-black text-white text-5xl uppercase"
-                style={{ fontFamily: "var(--font-cinzel), sans-serif" }}
-              >
-                FD
-              </span>
+              <img src="/author-photo.jpg" alt="Filip Dumanowski" />
             </div>
           </div>
         </div>
