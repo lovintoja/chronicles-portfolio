@@ -10,12 +10,14 @@ export default function PostCard({ post }: PostCardProps) {
       })
     : null
 
+  const commentCount = post._count?.comments ?? 0
+
   return (
-    <article className="dopamine-card p-6 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform duration-150">
+    <article className="post-card-wrapper dopamine-card p-6 hover:translate-x-[-2px] hover:translate-y-[-2px] transition-transform duration-150">
       <div className="mb-3">
         {date && (
           <time className="post-card__date text-xs tracking-widest uppercase text-electric-blue font-bold">
-            {date}
+            ▸ {date}
           </time>
         )}
       </div>
@@ -25,7 +27,7 @@ export default function PostCard({ post }: PostCardProps) {
         </h2>
       </Link>
       {post.excerpt && (
-        <p className="text-pop-black leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+        <p className="text-pop-black leading-relaxed mb-4 line-clamp-2 sm:line-clamp-3">{post.excerpt}</p>
       )}
       <div className="flex items-center justify-between mt-4 pt-4 border-t-2 border-pop-black">
         {post.author?.name && (
@@ -34,9 +36,9 @@ export default function PostCard({ post }: PostCardProps) {
           </span>
         )}
         <div className="flex items-center gap-4">
-          {post._count && (
-            <span className="post-card__comment-count text-xs text-pop-black font-medium">
-              {post._count.comments} comment{post._count.comments !== 1 ? "s" : ""}
+          {post._count !== undefined && (
+            <span className="neo-border text-xs font-bold font-ui uppercase px-2 py-0.5 bg-pop-yellow text-pop-black">
+              {commentCount} {commentCount === 1 ? "reply" : "replies"}
             </span>
           )}
           <Link

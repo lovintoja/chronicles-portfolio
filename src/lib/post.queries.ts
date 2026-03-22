@@ -57,6 +57,8 @@ export async function getRecentPublishedPosts(count: number) {
       title: true,
       slug: true,
       headerImage: true,
+      excerpt: true,
+      publishedAt: true,
     },
   })
 }

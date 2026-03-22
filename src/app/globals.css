@@ -399,6 +399,33 @@ body {
   color: #FF2D9B;
 }
 
+.site-nav-link--active {
+  color: #FF2D9B;
+}
+
+.post-card-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.post-card-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #FF2D9B;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.2s ease;
+  z-index: 1;
+}
+
+.post-card-wrapper:hover::before {
+  transform: scaleY(1);
+}
+
 .site-nav-admin {
   display: flex;
   align-items: center;
