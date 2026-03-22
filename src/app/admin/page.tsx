@@ -15,9 +15,9 @@ export default async function AdminPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between gap-3 mb-6 sm:mb-8">
         <h2
-          className="text-2xl font-black text-pop-black tracking-wide"
+          className="text-xl sm:text-2xl font-black text-pop-black tracking-wide"
           style={{ fontFamily: "var(--font-cinzel), sans-serif" }}
         >
           All Posts
@@ -72,7 +72,7 @@ export default async function AdminPage() {
                   {post._count?.comments ?? 0} comment{(post._count?.comments ?? 0) !== 1 ? "s" : ""}
                 </p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1 sm:gap-2 shrink-0 flex-wrap justify-end">
                 <Link
                   href={`/admin/posts/${post.id}/edit`}
                   className="btn btn-ghost text-xs px-3 py-1.5 flex items-center gap-1"

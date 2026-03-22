@@ -41,9 +41,9 @@ export default function ContactPage() {
 
   return (
     <main>
-      <section className="max-w-5xl mx-auto px-6 py-12">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <p className="section-label mb-4">Contact</p>
-        <h1 className="font-display text-4xl md:text-5xl font-black" style={{
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-black" style={{
           backgroundImage: "linear-gradient(135deg, #FF2D9B 0%, #A020F0 50%, #00C2FF 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
@@ -56,15 +56,15 @@ export default function ContactPage() {
         </p>
       </section>
 
-      <div className="max-w-5xl mx-auto px-6">
-        <DopamineDivider className="mb-10" />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <DopamineDivider className="mb-8 sm:mb-10" />
       </div>
 
-      <section className="max-w-5xl mx-auto px-6 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
 
           <div
-            className="dopamine-card p-8"
+            className="dopamine-card p-4 sm:p-6 md:p-8"
             style={{ boxShadow: "6px 6px 0 #A020F0" }}
           >
             <h2 className="font-display text-2xl font-black mb-6">Reach Out</h2>
@@ -106,8 +106,8 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="dopamine-card p-8">
-            <h2 className="font-display text-2xl font-black mb-6">Send a Message</h2>
+          <div className="dopamine-card p-4 sm:p-6 md:p-8">
+            <h2 className="font-display text-xl sm:text-2xl font-black mb-6">Send a Message</h2>
 
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               <div>

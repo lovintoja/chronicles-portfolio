@@ -66,7 +66,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <section className="max-w-6xl mx-auto px-6 pt-10 pb-6">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-4 sm:pb-6">
         <p className="section-label mb-6">Latest Dispatches</p>
 
         {recentPosts.length > 0 ? (
@@ -78,7 +78,7 @@ export default async function HomePage() {
             )}
 
             {sidePosts.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:grid-rows-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 md:grid-rows-2">
                 {sidePosts.slice(0, 4).map((post: BannerPost) => (
                   <PostBannerCard key={post.id} post={post} />
                 ))}
@@ -94,7 +94,7 @@ export default async function HomePage() {
         )}
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 pb-16">
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-10 sm:pb-16">
         <DopamineDivider className="mb-10" />
 
         <p className="section-label mb-8">All Posts</p>

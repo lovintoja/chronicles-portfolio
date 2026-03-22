@@ -85,27 +85,27 @@ const javaSkills = [
 export default function SkillsPage() {
   return (
     <main>
-      <section className="max-w-5xl mx-auto px-6 py-12">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <p className="section-label mb-3">Technical Skills</p>
-        <h1 className="font-display text-5xl md:text-6xl font-bold text-pop-black leading-tight">
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-pop-black leading-tight">
           My Stack
         </h1>
       </section>
 
       <DopamineDivider />
 
-      <section className="max-w-5xl mx-auto px-6 py-10">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <p className="section-label mb-6">Backend Development</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <div
-            className="dopamine-card p-6"
+            className="dopamine-card p-4 sm:p-6"
             style={{ boxShadow: "6px 6px 0 #00C2FF" }}
           >
             <div className="flex items-center gap-3 mb-4">
               <Server className="h-6 w-6 text-pop-black flex-shrink-0" />
               <h2
-                className="font-display text-2xl font-bold"
+                className="font-display text-xl sm:text-2xl font-bold"
                 style={{
                   background: "linear-gradient(90deg, #FF2D9B, #A020F0)",
                   WebkitBackgroundClip: "text",
@@ -138,13 +138,13 @@ export default function SkillsPage() {
           </div>
 
           <div
-            className="dopamine-card p-6"
+            className="dopamine-card p-4 sm:p-6"
             style={{ boxShadow: "6px 6px 0 #B6FF00" }}
           >
             <div className="flex items-center gap-3 mb-4">
               <Cpu className="h-6 w-6 text-pop-black flex-shrink-0" />
               <h2
-                className="font-display text-2xl font-bold"
+                className="font-display text-xl sm:text-2xl font-bold"
                 style={{
                   background: "linear-gradient(90deg, #FF2D9B, #A020F0)",
                   WebkitBackgroundClip: "text",
@@ -184,16 +184,16 @@ export default function SkillsPage() {
 
       <DopamineDivider />
 
-      <section className="max-w-5xl mx-auto px-6 py-10">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <p className="section-label mb-6">DevOps &amp; Cloud</p>
 
         <div
-          className="dopamine-card p-6 mb-6"
+          className="dopamine-card p-4 sm:p-6 mb-6"
           style={{ boxShadow: "8px 8px 0 #A020F0" }}
         >
           <div className="flex items-center gap-3 mb-3">
             <Cloud className="h-7 w-7 text-pop-black flex-shrink-0" />
-            <h2 className="font-display text-2xl font-bold text-pop-black">
+            <h2 className="font-display text-xl sm:text-2xl font-bold text-pop-black">
               Microsoft Azure
             </h2>
           </div>
@@ -225,7 +225,7 @@ export default function SkillsPage() {
 
       <DopamineDivider />
 
-      <section className="max-w-5xl mx-auto px-6 py-10">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <p className="section-label mb-6">Tooling &amp; Workflow</p>
         <div className="flex flex-wrap gap-3 justify-center">
           {tools.map((tool: string) => (

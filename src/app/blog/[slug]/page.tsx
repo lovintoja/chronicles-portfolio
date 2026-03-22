@@ -47,7 +47,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     : null
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
       <header className="mb-8 text-center">
         {date && (
           <time
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </time>
         )}
         <h1
-          className="text-4xl font-black text-pop-black leading-tight mb-4"
+          className="text-2xl sm:text-3xl md:text-4xl font-black text-pop-black leading-tight mb-4"
           style={{ fontFamily: "var(--font-cinzel), sans-serif" }}
         >
           {post.title}
@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <ArtDecoDivider className="mb-8" />
 
-      <div className="dopamine-card p-8 mb-12">
+      <div className="dopamine-card p-4 sm:p-6 md:p-8 mb-8 sm:mb-12">
         <PostContent html={post.content} />
       </div>
 

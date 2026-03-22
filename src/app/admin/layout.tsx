@@ -10,7 +10,7 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="bg-pop-black neo-border border-l-0 border-r-0 border-t-0 px-6 py-4">
+      <div className="bg-pop-black neo-border border-l-0 border-r-0 border-t-0 px-4 sm:px-6 py-3 sm:py-4">
         <h1
           className="text-xl font-black gradient-pop bg-clip-text text-transparent tracking-widest uppercase"
           style={{ fontFamily: "var(--font-cinzel), sans-serif", WebkitBackgroundClip: "text" }}
@@ -19,7 +19,7 @@ export default async function AdminLayout({
         </h1>
       </div>
       <AdminNav />
-      <main className="max-w-5xl mx-auto px-6 py-10">{children}</main>
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">{children}</main>
     </div>
   )
 }
