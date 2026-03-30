@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext"
 
 interface Comment {
   id: string
+  postId: string
   displayName: string
   tripcode: string | null
   body: string
