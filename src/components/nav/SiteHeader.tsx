@@ -13,7 +13,7 @@ type NavGroup = {
 
 const navGroups: NavGroup[] = [
   {
-    label: "About",
+    label: "Info",
     items: [
       { href: "/about", label: "About" },
       { href: "/skills", label: "Skills" },
@@ -42,28 +42,29 @@ function DesktopDropdown({ group, pathname }: { group: NavGroup; pathname: strin
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button
-        className={`site-nav-link flex items-center gap-1 cursor-pointer${isGroupActive ? " site-nav-link--active" : ""}`}
-        aria-expanded={open}
+      <span
+        className={`site-nav-link flex items-center gap-1 select-none${isGroupActive ? " site-nav-link--active" : ""}`}
         aria-haspopup="true"
       >
         {group.label}
         <ChevronDown
           className={`h-3 w-3 transition-transform duration-150 ${open ? "rotate-180" : ""}`}
         />
-      </button>
+      </span>
 
       {open && (
-        <div className="absolute top-full left-0 mt-2 min-w-[140px] bg-pop-black neo-border flex flex-col z-50 shadow-[4px_4px_0_0_#FF2D9B]">
-          {group.items.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`site-nav-link px-4 py-2.5 border-b border-white/10 last:border-b-0 whitespace-nowrap${pathname === item.href ? " site-nav-link--active" : ""}`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="absolute top-full left-0 pt-1 min-w-[140px] z-50">
+          <div className="bg-pop-black neo-border flex flex-col shadow-[4px_4px_0_0_#FF2D9B]">
+            {group.items.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`site-nav-link px-4 py-2.5 border-b border-white/10 last:border-b-0 whitespace-nowrap${pathname === item.href ? " site-nav-link--active" : ""}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>
