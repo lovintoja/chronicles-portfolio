@@ -83,9 +83,9 @@ export default function SiteHeader() {
     {
       label: t.nav.services,
       items: [
-        { href: "/projects", label: t.nav.projects },
-        { href: "/pricing", label: t.nav.pricing },
         { href: "/offer", label: t.nav.offer },
+        { href: "/pricing", label: t.nav.pricing },
+        { href: "/projects", label: t.nav.projects },
       ],
     },
   ]
