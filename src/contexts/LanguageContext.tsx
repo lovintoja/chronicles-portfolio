@@ -11,21 +11,26 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>("en")
+interface LanguageProviderProps {
+  children: ReactNode
+  initialLang?: Language
+}
 
+export function LanguageProvider({ children, initialLang = "en" }: LanguageProviderProps) {
+  // Initialise directly from the server-read cookie value — no flash
+  const [lang, setLangState] = useState<Language>(initialLang)
+
+  // Sync html[lang] on mount and whenever lang changes
   useEffect(() => {
-    const stored = localStorage.getItem("site-lang")
-    if (stored === "pl" || stored === "en") {
-      setLangState(stored)
-      document.documentElement.lang = stored
-    }
-  }, [])
+    document.documentElement.lang = lang
+  }, [lang])
 
   function setLang(next: Language) {
     setLangState(next)
+    // Persist in cookie (readable server-side → no flash on next load)
+    document.cookie = `site-lang=${next}; path=/; max-age=31536000; SameSite=Lax`
+    // Also keep localStorage as fallback
     localStorage.setItem("site-lang", next)
-    document.documentElement.lang = next
   }
 
   return (

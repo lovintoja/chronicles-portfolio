@@ -118,6 +118,21 @@ export const translations = {
     langBadge: {
       writtenIn: "Written in",
     },
+    chat: {
+      title: "💬 Live Chat",
+      connected: "Connected",
+      disconnected: "Disconnected",
+      closeChat: "Close chat",
+      online: "Online",
+      you: "You",
+      noOneOnline: "No one else online",
+      message: "Message",
+      block: "Block",
+      selectUser: "Select a user to start chatting",
+      chattingWith: "Chatting with",
+      placeholder: "Type a message… (Ctrl+Enter to send)",
+      send: "Send ↑",
+    },
   },
   pl: {
     nav: {
@@ -236,7 +251,22 @@ export const translations = {
     langBadge: {
       writtenIn: "Napisany w języku",
     },
+    chat: {
+      title: "💬 Live Chat",
+      connected: "Połączono",
+      disconnected: "Rozłączono",
+      closeChat: "Zamknij czat",
+      online: "Online",
+      you: "Ty",
+      noOneOnline: "Nikt inny nie jest online",
+      message: "Napisz",
+      block: "Zablokuj",
+      selectUser: "Wybierz użytkownika, żeby zacząć rozmawiać",
+      chattingWith: "Rozmowa z",
+      placeholder: "Napisz wiadomość… (Ctrl+Enter, żeby wysłać)",
+      send: "Wyślij ↑",
+    },
   },
 } as const
 
-export type Translations = (typeof translations)["en"]
+export type Translations = (typeof translations)[Language]

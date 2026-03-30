@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useChatContext } from "@/components/chat/ChatProvider"
+import { useLanguage } from "@/contexts/LanguageContext"
 import type { ChatMessage } from "@/lib/chat/types"
 
 const EMOJIS = [
@@ -15,6 +16,7 @@ const EMOJIS = [
 
 export default function MessageWindow() {
   const { chatId, selectedPartnerId, messages, sendMessage } = useChatContext()
+  const { t } = useLanguage()
 
   const [inputValue, setInputValue] = useState("")
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false)
@@ -51,7 +53,7 @@ export default function MessageWindow() {
       <div className="chat-message-window">
         <div className="chat-empty-state">
           <span className="chat-empty-state__icon">💬</span>
-          <span className="chat-empty-state__text">Select a user to start chatting</span>
+          <span className="chat-empty-state__text">{t.chat.selectUser}</span>
         </div>
       </div>
     )
@@ -60,7 +62,7 @@ export default function MessageWindow() {
   return (
     <div className="chat-message-window">
       <div className="chat-window-header">
-        Chatting with {selectedPartnerId.slice(0, 8)}…
+        {t.chat.chattingWith} {selectedPartnerId.slice(0, 8)}…
       </div>
 
       <div className="chat-message-list">
@@ -124,7 +126,7 @@ export default function MessageWindow() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type a message… (Ctrl+Enter to send)"
+          placeholder={t.chat.placeholder}
           rows={2}
         />
         <div className="chat-input-actions">
@@ -142,7 +144,7 @@ export default function MessageWindow() {
             onClick={() => void handleSend()}
             disabled={!inputValue.trim() || isSending}
           >
-            Send ↑
+            {t.chat.send}
           </button>
         </div>
       </div>

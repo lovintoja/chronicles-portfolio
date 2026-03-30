@@ -3,14 +3,16 @@
 import { useChatContext } from "@/components/chat/ChatProvider"
 import OnlineUserList from "@/components/chat/OnlineUserList"
 import MessageWindow from "@/components/chat/MessageWindow"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function ChatPanel() {
   const { isPanelOpen, isConnected, closePanel } = useChatContext()
+  const { t } = useLanguage()
 
   return (
     <div className={`chat-panel ${isPanelOpen ? "chat-panel--open" : ""}`}>
       <div className="chat-panel__header">
-        <span className="chat-panel__title">💬 Live Chat</span>
+        <span className="chat-panel__title">{t.chat.title}</span>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <span
             style={{
@@ -22,12 +24,12 @@ export default function ChatPanel() {
               display: "inline-block",
               flexShrink: 0,
             }}
-            aria-label={isConnected ? "Connected" : "Disconnected"}
+            aria-label={isConnected ? t.chat.connected : t.chat.disconnected}
           />
           <button
             className="chat-panel__close"
             onClick={closePanel}
-            aria-label="Close chat"
+            aria-label={t.chat.closeChat}
           >
             ✕
           </button>

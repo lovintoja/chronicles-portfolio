@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useChatContext } from "@/components/chat/ChatProvider"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function OnlineUserList() {
   const {
@@ -12,11 +13,11 @@ export default function OnlineUserList() {
     selectPartner,
     blockUser,
   } = useChatContext()
+  const { t } = useLanguage()
 
   const [openMenuId, setOpenMenuId] = useState<string | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
-  // Close context menu when clicking outside
   useEffect(() => {
     function handleMouseDown(e: MouseEvent) {
       if (
@@ -38,14 +39,14 @@ export default function OnlineUserList() {
   return (
     <div className="chat-sidebar">
       <div className="chat-sidebar__heading">
-        ● Online ({onlineUserIds.length})
+        ● {t.chat.online} ({onlineUserIds.length})
       </div>
-      <div className="chat-my-id">You: {chatId ? `${chatId.slice(0, 8)}…` : "..."}</div>
+      <div className="chat-my-id">{t.chat.you}: {chatId ? `${chatId.slice(0, 8)}…` : "..."}</div>
       <div className="chat-sidebar__list" ref={menuRef}>
         {otherUsers.length === 0 ? (
           <div className="chat-empty-state" style={{ padding: "1rem 0.75rem" }}>
             <span className="chat-empty-state__text" style={{ fontSize: "0.65rem" }}>
-              No one else online
+              {t.chat.noOneOnline}
             </span>
           </div>
         ) : (
@@ -90,7 +91,7 @@ export default function OnlineUserList() {
                         setOpenMenuId(null)
                       }}
                     >
-                      Message
+                      {t.chat.message}
                     </button>
                     <button
                       className="chat-context-menu__item chat-context-menu__item--danger"
@@ -100,7 +101,7 @@ export default function OnlineUserList() {
                         setOpenMenuId(null)
                       }}
                     >
-                      Block
+                      {t.chat.block}
                     </button>
                   </div>
                 )}
