@@ -49,7 +49,7 @@ export default function PricingPage() {
       {/* Websites — 3 package cards */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-10">
         <p className="section-label mb-6">{t.pricing.websitesSection}</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {webTiers.map(({ key, highlighted, shadow, accentBorder }) => {
             const pkg = t.pricing.web[key]
             return (
@@ -79,8 +79,8 @@ export default function PricingPage() {
                   )}
                 </div>
 
-                {/* Feature rows */}
-                <div className="flex flex-col divide-y-2 divide-pop-black/10 flex-1">
+                {/* Feature rows — flex-1 pushes price/CTA to bottom */}
+                <div className="flex flex-col divide-y-2 divide-pop-black/10 flex-1 justify-start">
                   {featureRows.map(({ label, key: fKey }) => (
                     <div key={fKey} className="px-5 py-3">
                       <p
