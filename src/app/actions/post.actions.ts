@@ -14,6 +14,7 @@ export async function createPost(formData: FormData) {
   const excerpt = formData.get("excerpt") as string
   const content = formData.get("content") as string
   const headerImage = (formData.get("headerImage") as string) ?? ""
+  const language = (formData.get("language") as string) || "en"
 
   if (!title || !content) {
     throw new Error("Title and content are required")
@@ -28,6 +29,7 @@ export async function createPost(formData: FormData) {
       excerpt: excerpt?.trim() || null,
       content,
       headerImage: headerImage.trim(),
+      language,
       authorId: session.user.id,
     },
   })
@@ -45,6 +47,7 @@ export async function updatePost(id: string, formData: FormData) {
   const excerpt = formData.get("excerpt") as string
   const content = formData.get("content") as string
   const headerImage = (formData.get("headerImage") as string) ?? ""
+  const language = (formData.get("language") as string) || "en"
 
   if (!title || !content) {
     throw new Error("Title and content are required")
@@ -60,6 +63,7 @@ export async function updatePost(id: string, formData: FormData) {
       excerpt: excerpt?.trim() || null,
       content,
       headerImage: headerImage.trim(),
+      language,
       updatedAt: new Date(),
     },
   })

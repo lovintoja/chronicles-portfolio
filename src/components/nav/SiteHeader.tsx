@@ -5,30 +5,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { PenLine, Menu, X, ChevronDown } from "lucide-react"
 import ChatNavButton from "@/components/nav/ChatNavButton"
+import LanguageSwitcher from "@/components/nav/LanguageSwitcher"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 type NavGroup = {
   label: string
   items: { href: string; label: string }[]
 }
-
-const navGroups: NavGroup[] = [
-  {
-    label: "Info",
-    items: [
-      { href: "/about", label: "About" },
-      { href: "/skills", label: "Skills" },
-      { href: "/contact", label: "Contact" },
-    ],
-  },
-  {
-    label: "Services",
-    items: [
-      { href: "/projects", label: "Projects" },
-      { href: "/pricing", label: "Pricing" },
-      { href: "/offer", label: "Offer" },
-    ],
-  },
-]
 
 function DesktopDropdown({ group, pathname }: { group: NavGroup; pathname: string }) {
   const [open, setOpen] = useState(false)
@@ -76,6 +59,7 @@ export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [activeGroup, setActiveGroup] = useState<string | null>(null)
   const pathname = usePathname()
+  const { t } = useLanguage()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8)
@@ -86,6 +70,25 @@ export default function SiteHeader() {
   function toggleGroup(label: string) {
     setActiveGroup(prev => (prev === label ? null : label))
   }
+
+  const navGroups: NavGroup[] = [
+    {
+      label: t.nav.info,
+      items: [
+        { href: "/about", label: t.nav.about },
+        { href: "/skills", label: t.nav.skills },
+        { href: "/contact", label: t.nav.contact },
+      ],
+    },
+    {
+      label: t.nav.services,
+      items: [
+        { href: "/projects", label: t.nav.projects },
+        { href: "/pricing", label: t.nav.pricing },
+        { href: "/offer", label: t.nav.offer },
+      ],
+    },
+  ]
 
   return (
     <header
@@ -106,15 +109,17 @@ export default function SiteHeader() {
             <DesktopDropdown key={group.label} group={group} pathname={pathname} />
           ))}
           <ChatNavButton />
+          <LanguageSwitcher />
           <Link href="/admin" className="site-nav-admin flex items-center gap-1.5">
             <PenLine className="h-3.5 w-3.5" />
             Admin
           </Link>
         </nav>
 
-        {/* Mobile right side: chat button + hamburger */}
+        {/* Mobile right side: chat + language + hamburger */}
         <div className="flex items-center gap-2 md:hidden">
           <ChatNavButton />
+          <LanguageSwitcher />
           <button
             onClick={() => setOpen(v => !v)}
             className="neo-border bg-hot-pink text-white p-2"

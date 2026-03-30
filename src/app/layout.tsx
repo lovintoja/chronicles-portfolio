@@ -4,6 +4,7 @@ import "./globals.css"
 import SiteHeader from "@/components/nav/SiteHeader"
 import SiteFooter from "@/components/nav/SiteFooter"
 import { ChatProvider } from "@/components/chat/ChatProvider"
+import { LanguageProvider } from "@/contexts/LanguageContext"
 
 const bungee = Bungee({
   subsets: ["latin"],
@@ -45,11 +46,13 @@ export default function RootLayout({
       className={`${bungee.variable} ${spaceGrotesk.variable} ${spaceGroteskUI.variable}`}
     >
       <body className="min-h-screen bg-white text-pop-black antialiased">
-        <ChatProvider>
-          <SiteHeader />
-          {children}
-          <SiteFooter />
-        </ChatProvider>
+        <LanguageProvider>
+          <ChatProvider>
+            <SiteHeader />
+            {children}
+            <SiteFooter />
+          </ChatProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

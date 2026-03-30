@@ -21,6 +21,7 @@ export default function NewPostPage() {
   const [excerpt, setExcerpt] = useState("")
   const [content, setContent] = useState("")
   const [headerImage, setHeaderImage] = useState("")
+  const [language, setLanguage] = useState("en")
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState("")
   const [isPending, setIsPending] = useState(false)
@@ -71,6 +72,7 @@ export default function NewPostPage() {
     formData.append("excerpt", excerpt)
     formData.append("content", content)
     formData.append("headerImage", headerImage)
+    formData.append("language", language)
 
     try {
       const { createPost } = await import("@/app/actions/post.actions")
@@ -155,6 +157,37 @@ export default function NewPostPage() {
             style={{ fontFamily: "var(--font-playfair), sans-serif" }}
             placeholder="Brief description for post cards..."
           />
+        </div>
+
+        {/* Post Language */}
+        <div>
+          <label
+            htmlFor="language"
+            className="block text-xs tracking-widest uppercase text-vivid-purple font-bold mb-1"
+            style={{ fontFamily: "var(--font-cormorant), sans-serif" }}
+          >
+            Post Language
+          </label>
+          <div className="flex gap-3">
+            {(["en", "pl"] as const).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                onClick={() => setLanguage(lang)}
+                className={`neo-border px-4 py-2 text-sm font-bold font-ui uppercase tracking-widest flex items-center gap-2 transition-colors ${
+                  language === lang
+                    ? "bg-hot-pink text-white"
+                    : "bg-white text-pop-black hover:bg-pop-yellow"
+                }`}
+              >
+                <span>{lang === "en" ? "🇬🇧" : "🇵🇱"}</span>
+                {lang === "en" ? "English" : "Polish"}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-vivid-purple mt-1" style={{ fontFamily: "var(--font-cormorant), sans-serif" }}>
+            This tag will be displayed on the post to indicate the post language.
+          </p>
         </div>
 
         {/* Header Image Upload */}

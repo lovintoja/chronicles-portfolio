@@ -21,6 +21,7 @@ interface PostData {
   excerpt: string | null
   content: string
   headerImage: string
+  language: string
 }
 
 export default function EditPostPage() {
@@ -32,6 +33,7 @@ export default function EditPostPage() {
   const [excerpt, setExcerpt] = useState("")
   const [content, setContent] = useState("")
   const [headerImage, setHeaderImage] = useState("")
+  const [language, setLanguage] = useState("en")
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState("")
   const [isPending, setIsPending] = useState(false)
@@ -48,6 +50,7 @@ export default function EditPostPage() {
         setExcerpt(data.excerpt ?? "")
         setContent(data.content)
         setHeaderImage(data.headerImage ?? "")
+        setLanguage(data.language ?? "en")
       })
       .catch(() => setError("Failed to load post"))
   }, [params.id])
@@ -95,6 +98,7 @@ export default function EditPostPage() {
     formData.append("excerpt", excerpt)
     formData.append("content", content)
     formData.append("headerImage", headerImage)
+    formData.append("language", language)
 
     try {
       const { updatePost } = await import("@/app/actions/post.actions")
@@ -185,6 +189,33 @@ export default function EditPostPage() {
             className="w-full neo-border bg-white px-3 py-2 text-pop-black focus:outline-none focus:shadow-[0_0_0_3px_#00C2FF] transition-shadow resize-y"
             style={{ fontFamily: "var(--font-playfair), sans-serif" }}
           />
+        </div>
+
+        {/* Post Language */}
+        <div>
+          <label
+            className="block text-xs tracking-widest uppercase text-vivid-purple font-bold mb-1"
+            style={{ fontFamily: "var(--font-cormorant), sans-serif" }}
+          >
+            Post Language
+          </label>
+          <div className="flex gap-3">
+            {(["en", "pl"] as const).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                onClick={() => setLanguage(lang)}
+                className={`neo-border px-4 py-2 text-sm font-bold font-ui uppercase tracking-widest flex items-center gap-2 transition-colors ${
+                  language === lang
+                    ? "bg-hot-pink text-white"
+                    : "bg-white text-pop-black hover:bg-pop-yellow"
+                }`}
+              >
+                <span>{lang === "en" ? "🇬🇧" : "🇵🇱"}</span>
+                {lang === "en" ? "English" : "Polish"}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Header Image Upload */}
