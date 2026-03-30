@@ -7,10 +7,10 @@ import { useLanguage } from "@/contexts/LanguageContext"
 
 type WebTier = "landing" | "business" | "premium"
 
-const webTiers: { key: WebTier; highlighted: boolean; shadow: string; accentBorder: string }[] = [
-  { key: "landing",  highlighted: false, shadow: "4px 4px 0 #00C2FF", accentBorder: "#00C2FF" },
-  { key: "business", highlighted: true,  shadow: "4px 4px 0 #FF2D9B", accentBorder: "#FF2D9B" },
-  { key: "premium",  highlighted: false, shadow: "4px 4px 0 #A020F0", accentBorder: "#A020F0" },
+const webTiers: { key: WebTier; shadow: string; accentBorder: string }[] = [
+  { key: "landing",  shadow: "4px 4px 0 #00C2FF", accentBorder: "#00C2FF" },
+  { key: "business", shadow: "4px 4px 0 #FF2D9B", accentBorder: "#FF2D9B" },
+  { key: "premium",  shadow: "4px 4px 0 #A020F0", accentBorder: "#A020F0" },
 ]
 
 export default function PricingPage() {
@@ -28,7 +28,6 @@ export default function PricingPage() {
     <main>
       {/* Page header */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
-        <p className="section-label mb-4">{t.pricing.pageLabel}</p>
         <h1
           className="font-display text-3xl sm:text-4xl md:text-5xl font-black"
           style={{
@@ -50,7 +49,7 @@ export default function PricingPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-10">
         <p className="section-label mb-6">{t.pricing.websitesSection}</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {webTiers.map(({ key, highlighted, shadow, accentBorder }) => {
+          {webTiers.map(({ key, shadow, accentBorder }) => {
             const pkg = t.pricing.web[key]
             return (
               <div
@@ -69,14 +68,6 @@ export default function PricingPage() {
                   >
                     {pkg.name}
                   </h2>
-                  {highlighted && (
-                    <span
-                      className="neo-border text-xs font-black font-ui uppercase px-2 py-0.5 text-white tracking-widest"
-                      style={{ background: accentBorder }}
-                    >
-                      {t.pricing.recommended}
-                    </span>
-                  )}
                 </div>
 
                 {/* Feature rows — flex-1 pushes price/CTA to bottom */}
@@ -102,7 +93,7 @@ export default function PricingPage() {
                     className="text-xs font-bold uppercase tracking-widest text-vivid-purple mb-3"
                     style={{ fontFamily: "var(--font-cormorant), sans-serif" }}
                   >
-                    {t.pricing.priceEmpty}
+                    {pkg.price ? `${t.pricing.fromLabel} ${pkg.price}` : t.pricing.priceEmpty}
                   </p>
                   <Link
                     href="/contact"
@@ -128,12 +119,6 @@ export default function PricingPage() {
           <div className="dopamine-card p-6 sm:p-8 flex flex-col gap-4" style={{ boxShadow: "6px 6px 0 #FF2D9B" }}>
             <div>
               <p className="section-label mb-1">{t.pricing.saasSection}</p>
-              <p
-                className="text-sm font-bold uppercase tracking-widest text-hot-pink"
-                style={{ fontFamily: "var(--font-cormorant), sans-serif" }}
-              >
-                {t.pricing.saas.subtitle}
-              </p>
             </div>
             <p className="font-body text-pop-black leading-relaxed text-sm">
               {t.pricing.saas.description}
@@ -171,12 +156,6 @@ export default function PricingPage() {
           <div className="dopamine-card p-6 sm:p-8 flex flex-col gap-4" style={{ boxShadow: "6px 6px 0 #B6FF00" }}>
             <div>
               <p className="section-label mb-1">{t.pricing.automationSection}</p>
-              <p
-                className="text-sm font-bold uppercase tracking-widest text-hot-pink"
-                style={{ fontFamily: "var(--font-cormorant), sans-serif" }}
-              >
-                {t.pricing.automation.subtitle}
-              </p>
             </div>
             <p className="font-body text-pop-black leading-relaxed text-sm">
               {t.pricing.automation.description}

@@ -154,6 +154,7 @@ export const translations = {
       cmsLabel: "Content Management",
       featuresLabel: "Features",
       seoLabel: "Performance & SEO",
+      fromLabel: "from",
       web: {
         landing: {
           name: "Landing Page",
@@ -162,6 +163,7 @@ export const translations = {
           cms: "None (changes in code) or simple panel",
           features: "Contact form, social media links",
           seo: "Basic optimisation and responsiveness",
+          price: "1 500 PLN",
         },
         business: {
           name: "Business Website",
@@ -170,6 +172,7 @@ export const translations = {
           cms: "Integrated CMS (e.g. WordPress, Headless)",
           features: "Blog, gallery, maps & analytics integration",
           seo: "On-page SEO optimisation, fast loading",
+          price: "4 000 PLN",
         },
         premium: {
           name: "Premium",
@@ -178,6 +181,7 @@ export const translations = {
           cms: "Dedicated, advanced admin panel",
           features: "Custom modules (bookings, client zone)",
           seo: "Advanced technical SEO, Core Web Vitals optimisation",
+          price: "",
         },
       },
       saas: {
@@ -371,6 +375,7 @@ export const translations = {
       cmsLabel: "Zarządzanie treścią",
       featuresLabel: "Funkcjonalności",
       seoLabel: "Wydajność i SEO",
+      fromLabel: "od",
       web: {
         landing: {
           name: "Landing Page",
@@ -379,6 +384,7 @@ export const translations = {
           cms: "Brak lub prosty panel",
           features: "Formularz kontaktowy, linki social media",
           seo: "Podstawowa optymalizacja i responsywność",
+          price: "1 500 PLN",
         },
         business: {
           name: "Strona Firmowa",
@@ -387,6 +393,7 @@ export const translations = {
           cms: "Wdrożony system CMS (np. WordPress, Headless)",
           features: "Blog, galeria, integracja z mapami i analityką",
           seo: "Optymalizacja SEO on-page, szybkie ładowanie",
+          price: "4 000 PLN",
         },
         premium: {
           name: "Premium",
@@ -394,7 +401,8 @@ export const translations = {
           scope: "Rozbudowana struktura, nielimitowane podstrony",
           cms: "Dedykowany, zaawansowany panel administracyjny",
           features: "Indywidualne moduły (rezerwacje, strefa klienta)",
-          seo: "Zaawansowane techniczne SEO, optymalizacja Core Web Vitals",
+          seo: "Zaawansowane techniczne SEO",
+          price: ""
         },
       },
       saas: {
