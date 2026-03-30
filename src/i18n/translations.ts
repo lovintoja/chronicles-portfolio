@@ -13,7 +13,7 @@ export const translations = {
       offer: "Offer",
     },
     hero: {
-      role: "Backend Engineer",
+      role: "Software Engineer",
       tagline: "Building distributed systems with .NET, Java & Azure — then writing about what breaks.",
       readBlog: "Read the Blog",
       viewSkills: "View Skills",
@@ -234,7 +234,7 @@ export const translations = {
       offer: "Oferta",
     },
     hero: {
-      role: "Inżynier Backend",
+      role: "Inżynier oprogramowania",
       tagline: "Buduję systemy rozproszone w .NET, Java i Azure — a potem piszę o tym, co się psuje.",
       readBlog: "Czytaj bloga",
       viewSkills: "Zobacz umiejętności",

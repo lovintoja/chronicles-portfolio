@@ -38,7 +38,6 @@ export default function OfferPage() {
   return (
     <main>
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
-        <p className="section-label mb-4">{t.offer.pageLabel}</p>
         <h1
           className="font-display text-3xl sm:text-4xl md:text-5xl font-black"
           style={{

@@ -16,7 +16,7 @@ interface LanguageProviderProps {
   initialLang?: Language
 }
 
-export function LanguageProvider({ children, initialLang = "en" }: LanguageProviderProps) {
+export function LanguageProvider({ children, initialLang = "pl" }: LanguageProviderProps) {
   // Initialise directly from the server-read cookie value — no flash
   const [lang, setLangState] = useState<Language>(initialLang)
 
