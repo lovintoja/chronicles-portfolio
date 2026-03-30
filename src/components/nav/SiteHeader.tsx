@@ -1,20 +1,79 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { PenLine, Menu, X } from "lucide-react"
+import { PenLine, Menu, X, ChevronDown } from "lucide-react"
 import ChatNavButton from "@/components/nav/ChatNavButton"
 
-const navLinks = [
-  { href: "/about", label: "About" },
-  { href: "/skills", label: "Skills" },
-  { href: "/contact", label: "Contact" },
+type NavGroup = {
+  label: string
+  items: { href: string; label: string }[]
+}
+
+const navGroups: NavGroup[] = [
+  {
+    label: "About",
+    items: [
+      { href: "/about", label: "About" },
+      { href: "/skills", label: "Skills" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  {
+    label: "Services",
+    items: [
+      { href: "/projects", label: "Projects" },
+      { href: "/pricing", label: "Pricing" },
+      { href: "/offer", label: "Offer" },
+    ],
+  },
 ]
+
+function DesktopDropdown({ group, pathname }: { group: NavGroup; pathname: string }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const isGroupActive = group.items.some(item => pathname === item.href)
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        className={`site-nav-link flex items-center gap-1 cursor-pointer${isGroupActive ? " site-nav-link--active" : ""}`}
+        aria-expanded={open}
+        aria-haspopup="true"
+      >
+        {group.label}
+        <ChevronDown
+          className={`h-3 w-3 transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 mt-2 min-w-[140px] bg-pop-black neo-border flex flex-col z-50 shadow-[4px_4px_0_0_#FF2D9B]">
+          {group.items.map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`site-nav-link px-4 py-2.5 border-b border-white/10 last:border-b-0 whitespace-nowrap${pathname === item.href ? " site-nav-link--active" : ""}`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeGroup, setActiveGroup] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -22,6 +81,10 @@ export default function SiteHeader() {
     window.addEventListener("scroll", handler, { passive: true })
     return () => window.removeEventListener("scroll", handler)
   }, [])
+
+  function toggleGroup(label: string) {
+    setActiveGroup(prev => (prev === label ? null : label))
+  }
 
   return (
     <header
@@ -38,14 +101,8 @@ export default function SiteHeader() {
 
         {/* Desktop nav — hidden below md */}
         <nav className="hidden md:flex items-center gap-4">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`site-nav-link${pathname === href ? " site-nav-link--active" : ""}`}
-            >
-              {label}
-            </Link>
+          {navGroups.map(group => (
+            <DesktopDropdown key={group.label} group={group} pathname={pathname} />
           ))}
           <ChatNavButton />
           <Link href="/admin" className="site-nav-admin flex items-center gap-1.5">
@@ -71,16 +128,40 @@ export default function SiteHeader() {
       {/* Mobile dropdown nav */}
       {open && (
         <nav className="md:hidden bg-pop-black border-t-4 border-hot-pink px-4 pb-4 flex flex-col gap-1">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className={`site-nav-link block py-3 border-b-2 border-white/10${pathname === href ? " site-nav-link--active" : ""}`}
-            >
-              {label}
-            </Link>
-          ))}
+          {navGroups.map(group => {
+            const isExpanded = activeGroup === group.label
+            const isGroupActive = group.items.some(item => pathname === item.href)
+
+            return (
+              <div key={group.label}>
+                <button
+                  onClick={() => toggleGroup(group.label)}
+                  className={`site-nav-link flex items-center justify-between w-full py-3 border-b-2 border-white/10${isGroupActive ? " site-nav-link--active" : ""}`}
+                  aria-expanded={isExpanded}
+                >
+                  {group.label}
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-150 ${isExpanded ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {isExpanded && (
+                  <div className="flex flex-col border-b-2 border-white/10">
+                    {group.items.map(item => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => { setOpen(false); setActiveGroup(null) }}
+                        className={`site-nav-link block py-2.5 pl-4 border-b border-white/5 last:border-b-0${pathname === item.href ? " site-nav-link--active" : ""}`}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
           <Link
             href="/admin"
             onClick={() => setOpen(false)}
